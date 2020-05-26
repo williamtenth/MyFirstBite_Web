@@ -1,9 +1,8 @@
-from sqlalchemy import create_engine, Column, String, Integer
+from sqlalchemy import Column, String, Integer
 
+class CRMInformationEntity(Base):
+    __tablename__ = "crm_information"
 
-engine = create_engine('mysql://root:admin1@localhost/sakila')
-
-class crm_information():
     crm_info_id = Column(Integer, primary_key=True)
     tipo_documento = Column(String)
     num_documento = Column(String)
