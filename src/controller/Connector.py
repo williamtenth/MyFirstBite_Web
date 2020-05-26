@@ -40,21 +40,15 @@ class Connector(object):
         self.__database_name = config['DEFAULT']['DB_NAME']
         self.__database_user = config['DEFAULT']['DB_USER']
         self.__database_pass = config['DEFAULT']['DB_PASS']
-        print("Host: " + self.__database_host)
-        print("Host: " + self.__database_port)
-        print("Host: " + self.__database_name)
-        print("Host: " + self.__database_user)
-        print("Host: " + self.__database_pass)
     
     """ Métodos para conexión"""
     def __startConnection(self):
         self.__conexion = MySQLdb.connect( self.__database_host, self.__database_user, self.__database_pass, self.__database_name )
-        print(self.__conexion)
-        print(self)
     
     def __closeConnection(self):
         self.__conexion.close()
     
+    """     Método con la lógica básica     """
     def runQuery(self, query):
         self.__startConnection()
         self.__cursor = self.__conexion.cursor()
@@ -67,18 +61,3 @@ class Connector(object):
     def getHost(self):
         return self.__database_host
     
-
-test1 = Connector()
-
-#test1.startConnection()
-test1.__nombre = "test1"
-test1.runQuery("SELECT crm_info_id FROM crm_information limit 3")
-
-test2 = Connector()
-test2.runQuery("SELECT crm_info_id FROM crm_information limit 2")
-#print(test1.__database_host)
-# test2.__nombre = "test2"
-# print(test2)
-
-# print(test1)
-# print(test2)
