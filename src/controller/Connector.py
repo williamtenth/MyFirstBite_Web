@@ -35,7 +35,7 @@ class Connector(object):
     def __init__(self):
         # Carga los datos de la conexión
         config = configparser.ConfigParser()
-        config.read('../controller/config.ini')
+        config.read('../misc/config.ini')
         self.__database_host = config['DEFAULT']['DB_HOST']
         self.__database_port = config['DEFAULT']['DB_PORT']
         self.__database_name = config['DEFAULT']['DB_NAME']
@@ -64,4 +64,6 @@ class Connector(object):
     """ Métodos de Acceso"""
     def getEngine(self):
         return self.__engine
-    
+        
+con = Connector()
+print(con.getEngine)
