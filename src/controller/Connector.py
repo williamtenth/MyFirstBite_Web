@@ -23,6 +23,7 @@ class Connector(object):
     __database_pass = None
     __conexion = None
     __cursor = None
+    __engine = None
     
     """ Método constructor con comportamiento Singleton. Sobrecarga __new__ """
     def __new__(cls):
@@ -40,6 +41,9 @@ class Connector(object):
         self.__database_name = config['DEFAULT']['DB_NAME']
         self.__database_user = config['DEFAULT']['DB_USER']
         self.__database_pass = config['DEFAULT']['DB_PASS']
+        """ Conexión por SQLalchemy"""
+        stringConnector = 'mysql://'+self.__database_user+':'+self.__database_pass+'@'+self.__database_host+'/'+self.__database_name
+        __engine = create_engine(stringConnector)
     
     """ Métodos para conexión"""
     def __startConnection(self):
@@ -58,6 +62,6 @@ class Connector(object):
         self.__closeConnection()
     
     """ Métodos de Acceso"""
-    def getHost(self):
-        return self.__database_host
+    def getEngine(self):
+        return self.__engine
     
