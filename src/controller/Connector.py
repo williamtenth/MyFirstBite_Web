@@ -24,7 +24,7 @@ class Connector(object):
     __conexion = None
     __cursor = None
     __engine = None
-    
+
     """ Método constructor con comportamiento Singleton. Sobrecarga __new__ """
     def __new__(cls):
         if Connector.__instance is None:
@@ -35,7 +35,7 @@ class Connector(object):
     def __init__(self):
         # Carga los datos de la conexión
         config = configparser.ConfigParser()
-        config.read('../misc/config.ini')
+        config.read('config.ini')
         self.__database_host = config['DEFAULT']['DB_HOST']
         self.__database_port = config['DEFAULT']['DB_PORT']
         self.__database_name = config['DEFAULT']['DB_NAME']
@@ -44,14 +44,14 @@ class Connector(object):
         """ Conexión por SQLalchemy"""
         stringConnector = 'mysql://'+self.__database_user+':'+self.__database_pass+'@'+self.__database_host+'/'+self.__database_name
         __engine = create_engine(stringConnector)
-    
+
     """ Métodos para conexión"""
     def __startConnection(self):
         self.__conexion = MySQLdb.connect( self.__database_host, self.__database_user, self.__database_pass, self.__database_name )
-    
+
     def __closeConnection(self):
         self.__conexion.close()
-    
+
     """     Método con la lógica básica     """
     def runQuery(self, query):
         self.__startConnection()
@@ -60,10 +60,7 @@ class Connector(object):
         for crm_info_id in self.__cursor.fetchall() :
             print (crm_info_id)
         self.__closeConnection()
-    
+
     """ Métodos de Acceso"""
     def getEngine(self):
         return self.__engine
-        
-con = Connector()
-print(con.getEngine)
